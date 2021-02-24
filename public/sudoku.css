@@ -1,0 +1,19 @@
+body{
+}
+
+div#container{
+    margin: auto;
+    padding: auto;
+    text-align: center;
+}
+
+div#body1{
+    border-style: inset;
+    border-width: 5px;
+}
+
+div#body2{
+    border-style: double;
+    border-width: 5px;
+    display: none;
+}
