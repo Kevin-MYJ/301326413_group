@@ -1,4 +1,5 @@
 body{
+  background-image: url("login.jpg");
 }
 
 div#container{
@@ -10,6 +11,7 @@ div#container{
 div#body1{
     border-style: inset;
     border-width: 5px;
+    background-color: #ffffff;
 }
 
 div#body2{
@@ -21,19 +23,37 @@ div#body2{
     height: 90%;
 }
 
+div#game-score{
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+}
+table#score{
+  font-size: 14px;
+  border:solid rgb(10, 10, 10) 1px;
+	border-radius: 10px;
+  margin: 0px auto;
+  box-shadow: 0 1px 1px #ccc;
+  background-color: #dce9f9;
+}
+#score td{
+  border-right:solid rgb(10, 10, 10) 1px;
+  border-bottom: solid rgb(10, 10, 10) 1px;
+  padding: 10px;
+  text-align: center;
+}
 div#gameBody{
     border-spacing: 0;
-    border: 2px solid black;
+    border: 1px solid rgb(233, 231, 231);
     padding: 0px;
     text-align: center;
 }
 table#gameBoard{
     margin: auto;
-    border: 3px solid black;
-    background-color: #F5F5F5;
+    border: 1px solid black;
+    background-color: rgb(255,255,255);
 }
 table.Board{
-    border: 2px solid brown;
+    border: 3px solid black;
 }
 .BoardElement{
     margin: auto;

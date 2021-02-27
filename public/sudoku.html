@@ -1,61 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="sudoku.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="stylesheets/sudoku.css" />
     <title>Sudoku Game</title>
-</head>
-<body>
+  </head>
+  <body>
     <div id="container">
-        <div id="header">
-            <h1>Sudoku Game</h1>
+      <div id="header">
+        <h1>Sudoku Game</h1>
+      </div>
+      <div id="body1">
+        <div id="intro-game">
+          <p id="intro">
+            Sudoku is a mathematical game originated in Switzerland in the 18th
+            century. It is a logic game that uses paper and pen to calculate.
+            Players need to infer the numbers of all remaining spaces based on
+            the known numbers on the 9×9 board.
+          </p>
         </div>
-        <div id="body1">
-            <div id="intro-game">
-                <p id="intro">Sudoku is a mathematical game originated in Switzerland in the 18th century. It is a logic game that uses
-                    paper and pen to calculate. Players need to infer the numbers of all remaining spaces based on the known numbers on the 9×9 board.
-                </p>
-            </div>
-            <div id="game-rule">
-                <h3>Standard Sudoku rules</h3>
-                <p id="rule1">Fill in any number from 1 to 9 in the blank, so that the numbers in each row, column, and square thick-lined nine-square
-                grid area on the disk all contain 1 to 9, without repeated numbers.</p>
-            </div>
-            <div id="game-operator">
+        <hr style="border: 1px dashed #000; height: 1px" />
+        <div id="game-rule">
+          <h3>Standard Sudoku rules</h3>
+          <p id="rule1">
+            Fill in any number from 1 to 9 in the blank, so that the numbers in
+            each row, column, and square thick-lined nine-square grid area on
+            the disk all contain 1 to 9, without repeated numbers.
+          </p>
+        </div>
+        <hr style="border: 1px dashed #000; height: 1px" />
+        <!-- <div id="game-operator">
                 <h3>Sudoku game operation</h3>
                 <p></p>
-            </div>
+            </div> -->
+      </div>
+      <div id="Button">
+        <button id="startButton" onclick="Gaming()">Start Game</button>
+      </div>
+      <div id="body2" class="hidden">
+        <div id="game-score">
+          <table id="score">
+            <tr>
+              <td>Game Times</td>
+              <td>Fraction product</td>
+              <td>Error number</td>
+            </tr>
+            <tr>
+              <td id="time">&nbsp&nbsp&nbsp&nbsp</td>
+              <td id="product">&nbsp&nbsp&nbsp&nbsp</td>
+              <td id="errot">&nbsp&nbsp&nbsp&nbsp</td>
+            </tr>
+          </table>
         </div>
-        <div id="Button">
-            <button id="startButton" onclick="Gaming()">Start Game</button>
+        <div id="gameBody"></div>
+      </div>
+      <div
+        id="popBoard"
+        class="popup-num hidden"
+        style="position: absolute; left: 10px; top: 10px"
+      >
+        <div class="row"><span>1</span><span>2</span><span>3</span></div>
+        <div class="row"><span>4</span><span>5</span><span>6</span></div>
+        <div class="row"><span>7</span><span>8</span><span>9</span></div>
+        <div class="row">
+          <span class="mark1"></span><span></span><span class="mark3"></span>
         </div>
-        <div id="body2" class="hidden">
-            <div id="game-score">
-                <p>Game Times:</p>
-                <p>Fraction product:</p>
-                <p>Error number:</p>
-            </div>
-            <div id="gameBody">
-            </div>
-        </div>
-            <div id="popBoard" class="popup-num hidden" style="position:absolute; left: 10px; top:10px">
-                <div class="row">
-                    <span>1</span><span>2</span><span>3</span>
-                </div>
-                <div class="row">
-                    <span>4</span><span>5</span><span>6</span>
-                </div>
-                <div class="row">
-                    <span>7</span><span>8</span><span>9</span>
-                </div>
-                <div class="row">
-                    <span class="mark1"></span><span></span><span class="mark3"></span>
-                </div>
-            </div>
+      </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="sudoku.js"></script>
-</body>
+    <script src="js/sudoku.js"></script>
+  </body>
 </html>
