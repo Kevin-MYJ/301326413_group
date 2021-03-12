@@ -9,19 +9,6 @@ function makeMatrix(v=0) {
     return Array.from({length:9}, ()=>makeRow(v));
 }
 
-var matrix = makeMatrix();
-var solution = makeMatrix();
-console.log(matrix);
-console.log(solution);
-
-const difficult = 45;
-const questionArr = hollowOut(difficult);
-var trueInput = 0;
-var falseInput = 0;
-console.log(questionArr);
-console.log("True Input : ", trueInput);
-console.log("False Input : ", falseInput);
-
 /** 
  * 把行坐标和列坐标 转变为 宮位置和宫内格序号
  **/
@@ -173,12 +160,13 @@ function showInBoard(matrix, questionArr) {
         for (let j = 0; j < matrix[i].length; j++) {
             let position = i * 9 + j;
             if (questionArr.indexOf(position) !== -1) {
-                let input = document.getElementById(position);
-                input.contentEditable = "true";
+                let label = "#"+position;
+                $(label).parent().addClass("Unknown");
                 continue;
             }
             let label = ""+position;
             document.getElementById(label).innerHTML = matrix[i][j];
+            // user[i][j] = matrix[i][j];
         }
     }
 }
@@ -189,18 +177,16 @@ function createGrid(parentId, tableNum, idArray){
     table1.setAttribute("class", tableClass);
     parentId.appendChild(table1);
 
-    let temp1 = document.createElement("tbody");
+    let temp1 = document.createElement("tr");
     table1.appendChild(temp1);
-    let temp2 = document.createElement("tr");
-    temp1.appendChild(temp2);
     for (let i = 0; i < 9; i++) {
         if (i%3 == 0 && i!=0) {
-            temp2 = document.createElement("tr");
-            temp1.appendChild(temp2);
+            temp1 = document.createElement("tr");
+            table1.appendChild(temp1);
         }
         let tdElement = document.createElement("td");
         tdElement.setAttribute("class", "BoardElement");
-        temp2.appendChild(tdElement);
+        temp1.appendChild(tdElement);
 
         let divElement = document.createElement("div");
         let divId = ""+idArray[i];
@@ -215,78 +201,91 @@ function createBoard() {
     board.setAttribute("id", "gameBoard");
     document.getElementById("gameBody").appendChild(board);
 
-    let tableBody = document.createElement("tbody");
-    board.appendChild(tableBody);
-
     // Group 1,2,3
     let tableTr123 = document.createElement("tr");
-    tableBody.appendChild(tableTr123);
-    let group1 = document.createElement("td");
-    let group2 = document.createElement("td");
-    let group3 = document.createElement("td");
-    tableTr123.appendChild(group1);
-    tableTr123.appendChild(group2);
-    tableTr123.appendChild(group3);
-    createGrid(group1, 1, [0,1,2,9,10,11,18,19,20]);
-    createGrid(group2, 2, [3,4,5,12,13,14,21,22,23]);
-    createGrid(group3, 3, [6,7,8,15,16,17,24,25,26]);
+    board.appendChild(tableTr123);
+    // let group1 = document.createElement("td");
+    // let group2 = document.createElement("td");
+    // let group3 = document.createElement("td");
+    // tableTr123.appendChild(group1);
+    // tableTr123.appendChild(group2);
+    // tableTr123.appendChild(group3);
+    createGrid(tableTr123, 1, [0,1,2,9,10,11,18,19,20]);
+    createGrid(tableTr123, 4, [27,28,29,36,37,38,45,46,47]);
+    createGrid(tableTr123, 7, [54,55,56,63,64,65,72,73,74]);
 
     // Group 4,5,6
     let tableTr456 = document.createElement("tr");
-    tableBody.appendChild(tableTr456);
-    let group4 = document.createElement("td");
-    let group5 = document.createElement("td");
-    let group6 = document.createElement("td");
-    tableTr456.appendChild(group4);
-    tableTr456.appendChild(group5);
-    tableTr456.appendChild(group6);
-    createGrid(group4, 4, [27,28,29,36,37,38,45,46,47]);
-    createGrid(group5, 5, [30,31,32,39,40,41,48,49,50]);
-    createGrid(group6, 6, [33,34,35,42,43,44,51,52,53]);
+    board.appendChild(tableTr456);
+    // let group4 = document.createElement("td");
+    // let group5 = document.createElement("td");
+    // let group6 = document.createElement("td");
+    // tableTr456.appendChild(group4);
+    // tableTr456.appendChild(group5);
+    // tableTr456.appendChild(group6);
+    createGrid(tableTr456, 2, [3,4,5,12,13,14,21,22,23]);
+    createGrid(tableTr456, 5, [30,31,32,39,40,41,48,49,50]);
+    createGrid(tableTr456, 8, [57,58,59,66,67,68,75,76,77]);
 
     //Group 7,8,9
     let tableTr789 = document.createElement("tr");
-    tableBody.appendChild(tableTr789);
-    let group7 = document.createElement("td");
-    let group8 = document.createElement("td");
-    let group9 = document.createElement("td");
-    tableTr789.appendChild(group7);
-    tableTr789.appendChild(group8);
-    tableTr789.appendChild(group9);
-    createGrid(group7, 7, [54,55,56,63,64,65,72,73,74]);
-    createGrid(group8, 8, [57,58,59,66,67,68,75,76,77]);
-    createGrid(group9, 9, [60,61,62,69,70,71,78,79,80]);
+    board.appendChild(tableTr789);
+    // let group7 = document.createElement("td");
+    // let group8 = document.createElement("td");
+    // let group9 = document.createElement("td");
+    // tableTr789.appendChild(group7);
+    // tableTr789.appendChild(group8);
+    // tableTr789.appendChild(group9);
+    createGrid(tableTr789, 3, [6,7,8,15,16,17,24,25,26]);
+    createGrid(tableTr789, 6, [33,34,35,42,43,44,51,52,53]);
+    createGrid(tableTr789, 9, [60,61,62,69,70,71,78,79,80]);
 }
 ///////////////////////////////
 
 function Gaming() {
     document.getElementById("startButton").style.display = "none";
     document.getElementById("body2").style.display = "inline-block";
+    document.getElementById("select-row").style.display = "flex";
 
     createBoard();
+    const matrix = makeMatrix();
     const sudo = new Generator(matrix);
     sudo.generator();
     // console.log(sudo.matrix);
 
-    solution = sudo.matrix;
-    console.log(solution);
-    console.log(matrix);
+    const solution = sudo.matrix;
+    console.log("solution matrix:", solution);
+
+    const difficult = 45;
+    var questionArr = hollowOut(difficult);
+    var trueInput = 0;
+    var falseInput = 0;
+    console.log("unknown id :", questionArr);
+    console.log("True Input : ", trueInput);
+    console.log("False Input : ", falseInput);
 
     showInBoard(solution, questionArr);
 
-    // for (let i = 0; i < questionArr.length; i++) {
-    //     let inputValue = document.getElementById(questionArr[i]);
-    //     console.log("addEvent");
-    //     console.log($("div#"+questionArr[i]));
-    //     $("div#"+questionArr[i]).bind("click",{pos: questionArr[i]}, function(event){
-    //         console.log(event.data.pos);
-    //         popup(event.data.pos);
-    //     });
-    // }
-}
+    $("#gameBody").on('click','.Unknown', {sol: solution}, function(e){
+        let select = $(e.target).children().attr("id");
+        console.log(select);
 
-// function popup(inputValue) {
-//     inputValue.removeClass()
-// }
+        $(e.target).css("background-color", "#00BFFF");
+
+        console.log($(e.target).length);
+        $("div.select-input").on("click", function (e) {
+            console.log(e);
+        })
+    });
+    // $("div.select-input").on("click", function (e) {
+    //     let i = parseInt($(e.target).html());
+    //     console.log("delete number:", i);
+    //     console.log("delete index:", test.indexOf(i));
+    //     console.log("delete value:", test[test.indexOf(i)])
+    //     test.splice(test.indexOf(i),1);
+    //     console.log("test is ", test);
+    // });
+    // console.log("out of click:", test);
+}
 
 

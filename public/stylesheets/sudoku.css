@@ -51,6 +51,8 @@ table#gameBoard{
     margin: auto;
     border: 1px solid black;
     background-color: rgb(255,255,255);
+    display: flex;
+    justify-content:center;
 }
 table.Board{
     border: 3px solid black;
@@ -66,69 +68,37 @@ table.Board{
     display: none;
 }
 
-.popup-num {
-  padding-left: 5%;
-  position: absolute;
-  padding-left: 0;
-}
-.popup-num .row > span {
-  display: inline-block;
-  cursor: pointer;
+div#select-row{
+  display: none;
+  justify-content:center;
+  margin: 0px auto;
+  padding: 0px auto;
   text-align: center;
-  width: 10%;
-  line-height: 24px;
-  border: 1px solid #ccc;
-  background: white;
-  border-bottom-width: 0;
-  border-right-width: 0;
 }
-.popup-num .row > span.col_g_right {
-  border-right-width: 1px;
-}
-.popup-num .row > span:first-child {
-  border-left-width: 2px;
-}
-.popup-num .row > span:last-child {
-  border-right-width: 2px;
-}
-.popup-num .row > span.empty {
-  color: #fff;
-  background: #fff;
-}
-.popup-num .row > span.fixed {
-  background: #eee;
-}
-.popup-num .row > span.error {
-  background: #f00;
-}
-.popup-num .row > span.error.empty {
-  color: #f00;
-}
-.popup-num .row > span.mark1 {
-  background: #caff00;
-}
-.popup-num .row > span.mark1.empty {
-  color: #caff00;
-}
-.popup-num .row > span.mark3 {
-  background: #ffc640;
-}
-.popup-num .row > span.mark3.empty {
-  color: #ffc640;
-}
-.popup-num .row.row_g_bottom > span {
-  border-bottom-width: 1px;
-}
-.popup-num .row:first-child > span {
-  border-top-width: 2px;
-}
-.popup-num .row:last-child > span {
-  border-bottom-width: 2px;
-}
-.popup-num .row > span {
+
+div.select-input{
+  display: inline;
+  border: 1px solid black;
+  padding: auto;
   width: 30px;
   height: 30px;
-  line-height: 30px;
-  background: #4ec1bd;
-  color: white;
+  background-color: #FFFAFA;
+  cursor: pointer;
+}
+
+div.select-input:hover{
+  background-color: 	#90EE90;
+}
+
+div.select-input:active{
+  background-color: #00BFFF;
+}
+
+.unknownStyle:hover{
+  cursor: pointer;
+  background-color: #90EE90;
+}
+
+.unknownStyle:active{
+  background-color: #00BFFF;
 }
