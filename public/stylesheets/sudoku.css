@@ -62,6 +62,16 @@ table.Board{
     width: 30px;
     height: 30px;
     border: 1px solid black;
+    padding: 0px;
+}
+
+div.Cell{
+  width: 30px;
+  height: 30px;
+  border: 0px;
+  padding: 0px;
+  margin: 0px;
+  text-align: center;
 }
 
 .hidden{
@@ -94,11 +104,10 @@ div.select-input:active{
   background-color: #00BFFF;
 }
 
-.unknownStyle:hover{
-  cursor: pointer;
-  background-color: #90EE90;
+div.Unknown:hover{
+  background-color: 	#90EE90;
 }
 
-.unknownStyle:active{
+div.selected{
   background-color: #00BFFF;
 }

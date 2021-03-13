@@ -161,7 +161,7 @@ function showInBoard(matrix, questionArr) {
             let position = i * 9 + j;
             if (questionArr.indexOf(position) !== -1) {
                 let label = "#"+position;
-                $(label).parent().addClass("Unknown");
+                $(label).addClass("Unknown");
                 continue;
             }
             let label = ""+position;
@@ -248,12 +248,12 @@ function Gaming() {
     document.getElementById("select-row").style.display = "flex";
 
     createBoard();
-    const matrix = makeMatrix();
+    var matrix = makeMatrix();
     const sudo = new Generator(matrix);
     sudo.generator();
     // console.log(sudo.matrix);
 
-    const solution = sudo.matrix;
+    var solution = sudo.matrix;
     console.log("solution matrix:", solution);
 
     const difficult = 45;
@@ -266,16 +266,28 @@ function Gaming() {
 
     showInBoard(solution, questionArr);
 
-    $("#gameBody").on('click','.Unknown', {sol: solution}, function(e){
-        let select = $(e.target).children().attr("id");
-        console.log(select);
+    $("#gameBody").on('click', '.Unknown', function(e){
+        if($(e.target).html() == ""){
+            $(".Unknown").removeClass("selected");
+            $(e.target).addClass("selected");
+        }
+    });
 
-        $(e.target).css("background-color", "#00BFFF");
-
-        console.log($(e.target).length);
-        $("div.select-input").on("click", function (e) {
-            console.log(e);
-        })
+    $("div.select-row, .select-input").on("click", function (e) {
+        let select = parseInt($(".selected").attr("id"));
+        console.log("select position is: ", select);
+        let inputValue = parseInt($(e.target).html());
+        console.log("input value:", inputValue);
+        let row = parseInt(parseInt(select) / 9);
+        let col = parseInt(parseInt(select) % 9);
+        if(solution[row][col] == inputValue){
+            console.log("True : " + solution[row][col] + " == " + inputValue);
+            $("#" + select).removeClass("Unknown");
+            $("#" + select).removeClass("selected");
+            $("#" + select).html(inputValue);
+        }else{
+            console.log("False : " + solution[row][col] + " != " + inputValue);
+        }
     });
     // $("div.select-input").on("click", function (e) {
     //     let i = parseInt($(e.target).html());
@@ -289,3 +301,16 @@ function Gaming() {
 }
 
 
+// var test = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+// $("div.select-input").on("click", function (e) {
+//     let i = parseInt($(e.target).html());
+//     console.log("delete number:", i);
+//     console.log("delete index:", test.indexOf(i));
+//     console.log("delete value:", test[test.indexOf(i)]);
+//     test.splice(test.indexOf(i), 1);
+//     console.log("test is ", test);
+//     if (test.length < 6) {
+//       console.log("Stop");
+//       $("div.select-input").off("click");
+//     }
+// });
