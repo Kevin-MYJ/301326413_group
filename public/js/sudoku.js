@@ -88,9 +88,14 @@ class Generator{
         this.matrix = matrix;
     }
     generator(){
-        while (true) {
-            if(this.generation() === true){
-                break;
+        let i = 0;
+        while (i < 10000) {
+            let result = this.generation();
+            if(result === true){
+                return true;
+            }
+            else{
+                return false;
             }
         }
     }
@@ -98,7 +103,6 @@ class Generator{
         this.order = makeMatrix()
                 .map(row=>row.map((v,i)=>i))
                 .map(row=>randomScramb(row));
-        
         for (let n = 1; n <=9; n++) {
             if(this.fillNum(n) === false){
                 return false;
@@ -118,14 +122,17 @@ class Generator{
 
         for (let i = 0; i < 9; i++) {
             const col = orders[i];
+            // 如果这个位置有值，跳过
             if (rowArr[col] !== 0) {
                 continue;
             }
+            // 检查这个位置能否填写 n
             if (checkFillNum(this.matrix, n, row, col) === false) {
                 continue;
             }
             rowArr[col] = n;
 
+            // 去下一行填写 n, 如果没有填写进去，就继续寻找当前行的下一个位置
             if(this.fill(n, row+1)===false){
                 const prevRow = row;
                 const prevCol = col;
@@ -250,13 +257,18 @@ function Gaming() {
     createBoard();
     var matrix = makeMatrix();
     const sudo = new Generator(matrix);
-    sudo.generator();
-    // console.log(sudo.matrix);
+    if(sudo.generator() === false){
+        alert(
+          "No correct Sudoku data solution was found after running 10,000 times. The interface will refresh automatically."
+        );
+        window.location.reload();
+    }
+    console.log(sudo.matrix);
 
     var solution = sudo.matrix;
     console.log("solution matrix:", solution);
 
-    const difficult = 45;
+    const difficult = 3;
     var questionArr = hollowOut(difficult);
     var trueInput = 0;
     var falseInput = 0;
@@ -285,32 +297,19 @@ function Gaming() {
             $("#" + select).removeClass("Unknown");
             $("#" + select).removeClass("selected");
             $("#" + select).html(inputValue);
+            trueInput += 1;
+            if (trueInput === difficult) {
+                alert("finish");
+            }
         }else{
+            falseInput += 1;
+            $("#error").html(falseInput);
+            if (falseInput === 3) {
+                $(".Unknown").off("click");
+                $("div.select-row, .select-input").off("click");
+                window.setTimeout(function(){alert("Loss");}, 700);
+            }
             console.log("False : " + solution[row][col] + " != " + inputValue);
         }
     });
-    // $("div.select-input").on("click", function (e) {
-    //     let i = parseInt($(e.target).html());
-    //     console.log("delete number:", i);
-    //     console.log("delete index:", test.indexOf(i));
-    //     console.log("delete value:", test[test.indexOf(i)])
-    //     test.splice(test.indexOf(i),1);
-    //     console.log("test is ", test);
-    // });
-    // console.log("out of click:", test);
 }
-
-
-// var test = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-// $("div.select-input").on("click", function (e) {
-//     let i = parseInt($(e.target).html());
-//     console.log("delete number:", i);
-//     console.log("delete index:", test.indexOf(i));
-//     console.log("delete value:", test[test.indexOf(i)]);
-//     test.splice(test.indexOf(i), 1);
-//     console.log("test is ", test);
-//     if (test.length < 6) {
-//       console.log("Stop");
-//       $("div.select-input").off("click");
-//     }
-// });

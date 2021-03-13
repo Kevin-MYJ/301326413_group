@@ -111,3 +111,7 @@ div.Unknown:hover{
 div.selected{
   background-color: #00BFFF;
 }
+
+.wrong{
+  border-color: red;
+}
