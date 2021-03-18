@@ -270,6 +270,10 @@ function Gaming() {
 
     const difficult = 3;
     var multiple = 56;
+    var time = 0;
+    var score = 0;
+    var sec = 0;
+    var min = 0;
     var questionArr = hollowOut(difficult);
     var trueInput = 0;
     var falseInput = 0;
@@ -279,13 +283,16 @@ function Gaming() {
 
     showInBoard(solution, questionArr);
 
-    var time = 0;
     console.log("start time is "+time);
     $("#time").html("00"+":"+"00");
-    window.setInterval(function(){
+    setInterval(function(){
         time++;
-        let sec = time % 60;
-        let min = parseInt(time / 60);
+        if(parseInt(time % 60) === 0){
+            multiple--;
+        }
+        $("#product").html("X"+multiple);
+        sec = time % 60;
+        min = parseInt(time / 60);
         let secShow, minShow;
         if (sec < 10){
             secShow = "0" + sec;
@@ -320,6 +327,8 @@ function Gaming() {
             $("#" + select).removeClass("Unknown");
             $("#" + select).removeClass("selected");
             $("#" + select).html(inputValue);
+            score += inputValue * multiple;
+            $("#scoreNumber").html(score);
             trueInput += 1;
             if (trueInput === difficult) {
                 alert("finish");
