@@ -269,6 +269,7 @@ function Gaming() {
     console.log("solution matrix:", solution);
 
     const difficult = 3;
+    var multiple = 56;
     var questionArr = hollowOut(difficult);
     var trueInput = 0;
     var falseInput = 0;
@@ -277,6 +278,28 @@ function Gaming() {
     console.log("False Input : ", falseInput);
 
     showInBoard(solution, questionArr);
+
+    var time = 0;
+    console.log("start time is "+time);
+    $("#time").html("00"+":"+"00");
+    window.setInterval(function(){
+        time++;
+        let sec = time % 60;
+        let min = parseInt(time / 60);
+        let secShow, minShow;
+        if (sec < 10){
+            secShow = "0" + sec;
+        }else{
+            secShow = "" + sec;
+        }
+        if (min < 10) {
+            minShow = "0" + min;
+        }else{
+            minShow = "" + min;
+        }
+        $("#time").html(minShow + ":" + secShow);
+    },1000, time);
+    console.log("time is :" + time);
 
     $("#gameBody").on('click', '.Unknown', function(e){
         if($(e.target).html() == ""){
