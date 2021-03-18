@@ -285,7 +285,7 @@ function Gaming() {
 
     console.log("start time is "+time);
     $("#time").html("00"+":"+"00");
-    setInterval(function(){
+    let assist = setInterval(function(){
         time++;
         if(parseInt(time % 60) === 0){
             multiple--;
@@ -305,7 +305,7 @@ function Gaming() {
             minShow = "" + min;
         }
         $("#time").html(minShow + ":" + secShow);
-    },1000, time);
+    },1000);
     console.log("time is :" + time);
 
     $("#gameBody").on('click', '.Unknown', function(e){
@@ -331,6 +331,7 @@ function Gaming() {
             $("#scoreNumber").html(score);
             trueInput += 1;
             if (trueInput === difficult) {
+                clearInterval(assist);
                 alert("finish");
             }
         }else{
@@ -339,6 +340,8 @@ function Gaming() {
             if (falseInput === 3) {
                 $(".Unknown").off("click");
                 $("div.select-row, .select-input").off("click");
+                $("#scoreNumber").html(score);
+                clearInterval(assist);
                 window.setTimeout(function(){alert("Loss");}, 700);
             }
             console.log("False : " + solution[row][col] + " != " + inputValue);
