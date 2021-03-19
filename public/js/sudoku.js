@@ -250,9 +250,12 @@ function createBoard() {
 ///////////////////////////////
 
 function Gaming() {
-    document.getElementById("startButton").style.display = "none";
+    document.getElementById("Button").style.display = "none";
     document.getElementById("body2").style.display = "inline-block";
     document.getElementById("select-row").style.display = "flex";
+    $("#game-rule").removeClass("hidden");
+    $("#game-operator").removeClass("hidden");
+    $("#intro-game").addClass("hidden");
 
     createBoard();
     var matrix = makeMatrix();
@@ -263,13 +266,24 @@ function Gaming() {
         );
         window.location.reload();
     }
-    console.log(sudo.matrix);
-
     var solution = sudo.matrix;
-    console.log("solution matrix:", solution);
 
-    const difficult = 3;
-    var multiple = 56;
+    var difficult, multiple;
+    var diff = $('input[name="difficulty"]:checked').val();
+    if (diff == "easy") {
+        difficult = 43;
+        multiple = 28;
+    }else if (diff == "medium") {
+        difficult = 51;
+        multiple = 56;
+    }else if (diff == "hard") {
+        difficult = 56;
+        multiple = 112;
+    }else{
+        difficult = 58;
+        multiple = 156;
+    }
+    console.log(difficult);
     var time = 0;
     var score = 0;
     var sec = 0;
@@ -277,17 +291,13 @@ function Gaming() {
     var questionArr = hollowOut(difficult);
     var trueInput = 0;
     var falseInput = 0;
-    console.log("unknown id :", questionArr);
-    console.log("True Input : ", trueInput);
-    console.log("False Input : ", falseInput);
 
     showInBoard(solution, questionArr);
 
-    console.log("start time is "+time);
     $("#time").html("00"+":"+"00");
     let assist = setInterval(function(){
         time++;
-        if(parseInt(time % 60) === 0){
+        if(parseInt(time % 30) === 4 && parseInt(time / 60) != 0){
             multiple--;
         }
         $("#product").html("X"+multiple);
@@ -306,7 +316,6 @@ function Gaming() {
         }
         $("#time").html(minShow + ":" + secShow);
     },1000);
-    console.log("time is :" + time);
 
     $("#gameBody").on('click', '.Unknown', function(e){
         if($(e.target).html() == ""){
@@ -317,13 +326,10 @@ function Gaming() {
 
     $("div.select-row, .select-input").on("click", function (e) {
         let select = parseInt($(".selected").attr("id"));
-        console.log("select position is: ", select);
         let inputValue = parseInt($(e.target).html());
-        console.log("input value:", inputValue);
         let row = parseInt(parseInt(select) / 9);
         let col = parseInt(parseInt(select) % 9);
         if(solution[row][col] == inputValue){
-            console.log("True : " + solution[row][col] + " == " + inputValue);
             $("#" + select).removeClass("Unknown");
             $("#" + select).removeClass("selected");
             $("#" + select).html(inputValue);
@@ -344,7 +350,6 @@ function Gaming() {
                 clearInterval(assist);
                 window.setTimeout(function(){alert("Loss");}, 700);
             }
-            console.log("False : " + solution[row][col] + " != " + inputValue);
         }
     });
 }
