@@ -283,7 +283,6 @@ function Gaming() {
         difficult = 58;
         multiple = 156;
     }
-    console.log(difficult);
     var time = 0;
     var score = 0;
     var sec = 0;
