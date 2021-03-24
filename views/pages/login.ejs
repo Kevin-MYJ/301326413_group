@@ -20,6 +20,11 @@
                     <% } else {%>
                         <div id="enrollReminder">
                             <p>Sign up Success!</p>
+                            <script>
+                                window.setTimeout(function(){
+                                    $("#toSignin").trigger("click");
+                                }, 1000);
+                            </script>
                         </div>    
                     <% } %>    
                 <% } %>
@@ -33,19 +38,20 @@
                     <label class="form_label" for="email">Email</label>
                     <input class="form_input" type="text" id="em" name="email" onchange="checkEmail()">
                     <button class="form_btn" type="submit" id="signup">Submit</button>
-                    <button class="form_toggle js-formToggle" type="button">Or, Sign In</button>
+                    <button class="form_toggle js-formToggle" type="button" id="toSignin">Or, Sign In</button>
                 </form>
             </div>
             <!--Sign <input type="text" name="" value="">-->
             <div class="panel_content panel_content-overlay js-panel_content ">
                 <h1 class="panel_title">  Sign In </h1>
-                <form class="form" id="loginIn">
+                <% if(determine == 1) {%><% } %>
+                <form class="form" id="loginIn" action="/login" method="POST">
                     <label class="form_label" for="usernameIn">Username</label>
                     <input class="form_input" type="text" id="usernameIn" name="usernameIn">
                     <label class="form_label" for="passwordIn">Password</label>
                     <input class="form_input " type="password" id="passwordIn" name="passwordIn">
                     <button class="form_btn" type="button" value="Submit">Sign In</button>
-                    <button class="form_toggle js-formToggle" type="button">Or, Sign Up</button>
+                    <button class="form_toggle js-formToggle" type="button" id="toSignup">Or, Sign Up</button>
                 </form>
             </div>
         </div>

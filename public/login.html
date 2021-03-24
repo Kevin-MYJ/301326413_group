@@ -4,10 +4,19 @@
     <meta charset="UTF-8">
     <title>Sudoku.oni</title>
     <link rel="stylesheet" href="stylesheets/login.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <body>
 <div class="page">
-
+    <script>
+        $(document).ready(function(){
+            // $("#signup").trigger("click");
+            document.querySelector('.js-panel_content').classList.add("animate");
+            document.querySelector('.js-imageAnimate').classList.add("animate");
+            $(".js-panel_content.animate").css({"animation":"movePanel 0.1s forwards"});
+            $(".js-imageAnimate.animate").css({"animation":"move 0.1s forwards"});
+        });
+    </script>
     <div class="panel">
         <div class="panel_visible">
             <!--Signup-->
@@ -19,7 +28,7 @@
                     <label class="form_label" for="password">Password</label>
                     <input class="form_input " type="password" id="password" name="password">
                     <button class="form_btn" type="button" value="Submit">Submit</button>
-                    <button class="form_toggle js-formToggle" type="button">Or, Sign In</button>
+                    <button class="form_toggle js-formToggle" type="button" id="signup">Or, Sign In</button>
                 </form>
             </div>
             <!--Signin-->
@@ -41,6 +50,6 @@
     </div>
 
 </div>
-<script src="js/main.js"></script>
+<script src="js/login.js"></script>
 </body>
 </html>
