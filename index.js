@@ -39,36 +39,36 @@ app.get('/', (req, res) => res.render('pages/login'));
 );*/
 
 /*insert into users(username, password, email, type) values(
-  kevinMa,
-  123456,
-  wengehuastudy2016@gmail.com,
-  admin
+  'kevinMa',
+  '123456',
+  'wengehuastudy2016@gmail.com',
+  'admin'
 );*/
 
 /*insert into users(username, password, email, type) values(
-  dezhengZhong,
-  123456,
-  zdz14155023@gmail.com,
-  admin
+  'dezhengZhong',
+  '123456',
+  'zdz14155023@gmail.com',
+  'admin'
 );*/
 
 /*insert into users(username, password, email, type) values(
-  meikoMi,
-  123456,
-  meiko19617336@gmail.com,
-  admin
+  'meikoMi',
+  '123456',
+  'meiko19617336@gmail.com',
+  'admin'
 );*/
 
 /*insert into users(username, password, email, type) values(
-  sn3an,
-  123456,
-  sunzhijie1998@gmail.com,
-  admin
+  'sn3an',
+  '123456',
+  'sunzhijie1998@gmail.com',
+  'admin'
 );*/
 
 /*insert into users(username, password, email, type) values(
-  inhwamo,
-  123456,
-  inhwa2000@gmail.com,
-  admin
+  'inhwamo',
+  '123456',
+  'inhwa2000@gmail.com',
+  'admin'
 );*/
