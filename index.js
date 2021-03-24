@@ -22,7 +22,7 @@ server = app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 app.get('/', (req, res) => res.render('pages/login'));
 
 /* create table users(
-  username varchar(10) not null,
+  username varchar(20) not null,
   password varchar(20) not null,
   email varchar(30) not null,
   type varchar(10) not null,
@@ -30,7 +30,7 @@ app.get('/', (req, res) => res.render('pages/login'));
 );*/
 
 /* create table usersdata(
-  userid varchar(10),
+  userid varchar(20),
   difficulty varchar(10) not null,
   time varchar(10) not null,
   score int not null,
