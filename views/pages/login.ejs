@@ -7,22 +7,32 @@
 </head>
 <body>
 <div class="page">
-
     <div class="panel">
         <div class="panel_visible">
             <!--Sign up-->
             <div class="panel_content">
                 <h1 class="panel_title">  Sign Up </h1>
-                <form class="form" id="signup" action="sudoku.html" >
+                <% if(determine == 0) {%>
+                    <% if (signupMessage != ""){ %>
+                        <div id="alt_warning" class = "alert alertwarning">
+                            <%= signupMessage%>
+                        </div>
+                    <% } else {%>
+                        <div id="enrollReminder">
+                            <p>Sign up Success!</p>
+                        </div>    
+                    <% } %>    
+                <% } %>
+                <form class="form" id="sinp" action="/update" method="POST" name="nyForm">
                     <label class="form_label" for="username">Username</label>
                     <input class="form_input" type="text" id="username" name="username">
                     <label class="form_label" for="password">Password</label>
                     <input class="form_input " type="password" id="password" name="password">
                     <label class="form_label" for="Confirm password">Confirm Password</label>
-                    <input class="form_input " type="password" id="Confirm-password" name="Confirm password">
+                    <input class="form_input " type="password" id="Confirmpassword" name="Confirm password" onchange="checkRepeat()">
                     <label class="form_label" for="email">Email</label>
-                    <input class="form_input" type="email" id="email" name="email">
-                    <button class="form_btn" type="submit" value="Submit">Submit</button>
+                    <input class="form_input" type="text" id="em" name="email" onchange="checkEmail()">
+                    <button class="form_btn" type="submit" id="signup">Submit</button>
                     <button class="form_toggle js-formToggle" type="button">Or, Sign In</button>
                 </form>
             </div>
@@ -45,6 +55,7 @@
     </div>
 
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="js/login.js"></script>
 </body>
 </html>

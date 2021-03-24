@@ -154,7 +154,7 @@ body, html{
     border-radius: 3px;
     background-color: #f2f2f2 ;
     box-shadow: 0px 2px 2px #D6D6D6;
-    border:none;
+    border-style:none;
     padding: 2%;
     margin-bottom: 15px;
     width: 250px;
@@ -208,4 +208,20 @@ body, html{
 .form_toggle:focus{
     outline: none;
     border-bottom: 1px solid #33A192;
+}
+
+#alt_warning{
+    background-color: red;
+    text-align: center;
+    color: #f2f2f2;
+}
+
+#enrollReminder{
+    background-color: green;
+    text-align: center;
+    color: #f2f2f2;
+}
+
+.hidden{
+    display: none;
 }

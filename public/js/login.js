@@ -24,3 +24,27 @@ function toggleForm(){
     }
 
 }
+
+function checkRepeat(){
+    var pw = $("#password").val();
+    var repw = $("#Confirmpassword").val();
+    if (pw != repw) {
+        $("button#signup").attr("disabled", "true");
+        $("#Confirmpassword").css({"border":"1px solid red"});
+    }else{
+        $("button#signup").removeAttr("disabled");
+        $("#Confirmpassword").css({ "border": "none" });
+    }
+}
+
+function checkEmail() {
+    var obj = $("#em").val();
+    var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/i; //邮箱验证
+    if(!reg.test(obj)){
+        $("button#signup").attr("disabled", "true");
+        $("#em").css({ "border": "1px solid red" });
+    }else{
+        $("button#signup").removeAttr("disabled");
+        $("#em").css({ "border": "none" });
+    }
+}
