@@ -44,13 +44,12 @@
             <!--Sign <input type="text" name="" value="">-->
             <div class="panel_content panel_content-overlay js-panel_content ">
                 <h1 class="panel_title">  Sign In </h1>
-                <% if(determine == 1) {%><% } %>
-                <form class="form" id="loginIn" action="/login" method="POST">
+                <form action="/login" method="POST" class="form" id="loginIn">
                     <label class="form_label" for="usernameIn">Username</label>
                     <input class="form_input" type="text" id="usernameIn" name="usernameIn">
                     <label class="form_label" for="passwordIn">Password</label>
                     <input class="form_input " type="password" id="passwordIn" name="passwordIn">
-                    <button class="form_btn" type="button" value="Submit">Sign In</button>
+                    <button class="form_btn" type="button" value="Submit" id="signin">Sign In</button>
                     <button class="form_toggle js-formToggle" type="button" id="toSignup">Or, Sign Up</button>
                 </form>
             </div>

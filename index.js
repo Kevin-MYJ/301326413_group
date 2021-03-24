@@ -21,13 +21,11 @@ app.get('/', (req, res) => {
 });
 
 app.post("/update", async (req, res) => {
-  console.log("in");
   var name = req.body.username;
   var email = req.body.email;
   var password = req.body.password;
   var judg_name = "new";
   var judg_email = "new";
-  console.log(name);
   var client = await pool.connect();
   var check_user = await client.query(
     `SELECT * FROM users where username = '${name}';`
@@ -55,9 +53,12 @@ app.post("/update", async (req, res) => {
   client.release();
 });
 
-// app.post("/login", async (req, res) =>{
-
-// });
+app.post("/login", (req, res) =>{
+  console.log("in");
+  var user = req.body.usernameIn;
+  console.log("in here "+user);
+  res.render("pages/sudoku", {'name':user});
+});
 
 /* create table users(
   username varchar(20) not null,

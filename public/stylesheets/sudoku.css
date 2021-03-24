@@ -8,6 +8,27 @@ div#container{
     text-align: center;
 }
 
+div#userInfo{
+  background-color: gray;
+  width: 100px;
+  height: 80px;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  text-align: center;
+  border-radius: 30%;
+  font-size: large;
+  color: white;
+}
+button#grade, button#signout{
+  font: bold 8px arial, helvetica, sans-serif;
+  cursor: pointer;
+  width: 80px;
+  height: 20px;
+  padding: 0px;
+  border-radius: 20%;
+}
+
 div#body1{
     border-style: inset;
     border-width: 5px;
