@@ -95,6 +95,8 @@ app.post("/:name/grade", async (req, res)=>{
   console.log("grade :"+user);
   var client = await pool.connect();
   var selectQuery = await client.query(`select difficulty, time, score, datetime from usersdata where userid = '${user}' order by datetime desc`);
+  console.log(selectQuery.rows);
+  console.log(typeof selectQuery.rows);
   var results = {'name' : user, 'data': selectQuery.rows};
   res.render('pages/userGrade', results);
   client.release();
@@ -102,7 +104,6 @@ app.post("/:name/grade", async (req, res)=>{
 
 app.post("/sudoku1", (req, res)=>{
   var user = req.body.user;
-  console.log("back to game :"+user);
   res.render("pages/sudoku", {'name':user});
 });
 
