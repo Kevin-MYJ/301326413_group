@@ -28,8 +28,8 @@
                                     $("#toSignin").trigger("click");
                                 }, 1000);
                             </script>
-                        </div>    
-                    <% } %>    
+                        </div>
+                    <% } %>
                 <% } %>
                 <form class="form" id="sinp" action="/update" method="POST" name="nyForm">
                     <label class="form_label" for="username">Username</label>
@@ -47,6 +47,18 @@
             <!--Sign <input type="text" name="" value="">-->
             <div class="panel_content panel_content-overlay js-panel_content ">
                 <h1 class="panel_title">  Sign In </h1>
+                <% if(determine == 0) {%>
+                    <% if (signupMessage != ""){ %>
+                        <div id="alt_warning" class = "alert alertwarning">
+                            <%= signupMessage%>
+                            <script>
+                                window.setTimeout(function(){
+                                    $("#toSignin").trigger("click");
+                                }, 1000);
+                            </script>
+                        </div>
+                    <% } %>
+                <% } %>
                 <form action="/login" method="POST" class="form" id="loginIn">
                     <label class="form_label" for="usernameIn">Username</label>
                     <input class="form_input" type="text" id="usernameIn" name="usernameIn">

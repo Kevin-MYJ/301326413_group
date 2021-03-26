@@ -58,9 +58,35 @@ app.post("/update", async (req, res) => {
   client.release();
 });
 
-app.post("/login", (req, res) =>{
+app.post("/login", async (req, res) =>{
   var user = req.body.usernameIn;
-  res.render("pages/sudoku", {'name':user});
+  var pw = req.body.passwordIn;
+  //var password = "[ { password: '" + pw + "' } ]"
+  var client = await pool.connect();
+  var data_user = await client.query(`SELECT * FROM users where username = '${user}';`);
+  if (data_user.rowCount == 1){
+    var data_pw = await client.query(`SELECT * FROM users where username = '${user}';`);
+    //var data_password = {'password': data_pw.rows};
+    var data_password = data_pw.rows;
+    console.log(pw);
+    //console.log(data_password);
+    data_password.forEach(async function (t) {
+      if(t.password != pw){
+        err = "Incorrect password!";
+        res.render("pages/login", { 'determine': 0, 'signupMessage': err });
+        return;
+      }
+      else{
+        res.render("pages/sudoku", {'name':user});
+      }
+    })
+  }
+  else{
+    err = "Username does not exist!";
+    res.render("pages/login", { 'determine': 0, 'signupMessage': err });
+    return;
+  }
+  client.release();
 });
 
 app.post("/sudoku", async(req, res)=>{
@@ -106,8 +132,7 @@ app.post("/sudoku1", (req, res)=>{
   res.render("pages/sudoku", {'name':user});
 });
 
-/* create table users(
-  username varchar(20) not null,
+/* create table users(username varchar(20) not null,
   password varchar(20) not null,
   email varchar(30) not null,
   type varchar(10) not null,
