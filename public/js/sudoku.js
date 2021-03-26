@@ -270,7 +270,11 @@ function Gaming() {
 
     var difficult, multiple;
     var diff = $('input[name="difficulty"]:checked').val();
-    if (diff == "easy") {
+    if( diff == "demo"){
+        difficult = 5;
+        multiple = 28;
+        console.log(solution);
+    }else if (diff == "easy") {
         difficult = 43;
         // difficult = 43;
         multiple = 28;
@@ -293,8 +297,6 @@ function Gaming() {
     var falseInput = 0;
 
     showInBoard(solution, questionArr);
-
-    console.log(solution);
 
     $("#time").html("00"+":"+"00");
     let assist = setInterval(function(){
@@ -352,9 +354,7 @@ function Gaming() {
                     minShow = "" + min;
                 }
                 var timer = minShow + ":" + secShow;
-                // recordData(difficult, timer, score);
                 let message = "You spend " + timer + " time to complete " + diff +" Sudoku game. The total score is " + score;
-                // alert(message);
                 swal("Success !", message, "success", {
                     button: "record",
                 });
@@ -391,6 +391,5 @@ function recordData(difficult, time, score) {
     form.append(inputTime);
     form.append(inputScore);
     $("body").append($(form));
-    // form.append($("button[class='swal-button swal-button--confirm']"));
     form.submit();
 }
