@@ -16,6 +16,11 @@ app.set('view engine', 'ejs');
 
 server = app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
+
+// determine = -1 means 第一次进入
+// determine = 0 means 注册事务
+// determine = 1 means 登录事务
+// determine = 2 means 登出事务
 app.get('/', (req, res) => {
   res.render("pages/login", { 'determine': -1 });
 });
@@ -54,9 +59,50 @@ app.post("/update", async (req, res) => {
 });
 
 app.post("/login", (req, res) =>{
-  console.log("in");
   var user = req.body.usernameIn;
-  console.log("in here "+user);
+  res.render("pages/sudoku", {'name':user});
+});
+
+app.post("/sudoku", async(req, res)=>{
+  var user = req.body.player;
+  var diff = req.body.difficult;
+  var time = req.body.timer;
+  var score = parseInt(req.body.result);
+  console.log("player is "+user);
+  console.log("difficultly is "+diff);
+  console.log("time is "+time);
+  console.log("Result is "+score);
+  // let sec = parseInt(time) % 60;
+  // let min = parseInt(parseInt(time) / 60);
+  // let trueTime = min + ":" + sec;
+  var date = new Date();
+  var dateTime = date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate() + " - " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+  console.log(dateTime);
+
+  var client = await pool.connect();
+  // var recordQuery = await client.query(`insert into usersdata values ('${name}', '${diff}', '${trueTime}', ${score}, ${dateTime})`);
+  var recordQuery = await client.query(`insert into usersdata values ('${user}', '${diff}', '${time}', ${score}, '${dateTime}')`);
+  res.render("pages/sudoku", { 'name': user });
+  client.release();
+});
+
+app.post("/signout", (req,res)=>{
+  res.render("pages/login", { 'determine': 2 });
+});
+
+app.post("/:name/grade", async (req, res)=>{
+  var user = req.params.name;
+  console.log("grade :"+user);
+  var client = await pool.connect();
+  var selectQuery = await client.query(`select difficulty, time, score, datetime from usersdata where userid = '${user}' order by datetime desc`);
+  var results = {'name' : user, 'data': selectQuery.rows};
+  res.render('pages/userGrade', results);
+  client.release();
+});
+
+app.post("/sudoku1", (req, res)=>{
+  var user = req.body.user;
+  console.log("back to game :"+user);
   res.render("pages/sudoku", {'name':user});
 });
 
@@ -73,7 +119,7 @@ app.post("/login", (req, res) =>{
   difficulty varchar(10) not null,
   time varchar(10) not null,
   score int not null,
-  datetime date not null,
+  datetime varchar(50) not null,
   foreign key (userid) references users(username)
 );*/
 

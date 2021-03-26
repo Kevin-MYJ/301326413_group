@@ -137,6 +137,16 @@ div.selected{
   border-color: red;
 }
 
+div#layer-mask{
+  background:#000;
+  display:block;
+  z-index:100;
+  width:100%;
+  position:absolute;
+  top:0;
+  left:0;
+}
+
 
 
 

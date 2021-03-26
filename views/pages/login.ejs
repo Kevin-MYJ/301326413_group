@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="stylesheets/login.css">
 </head>
 <body>
+<% if (determine == 2) {%>
+<script>window.setTimeout(function(){$("#toSignin").trigger("click");}, 1000);</script>
+<% } %>
 <div class="page">
     <div class="panel">
         <div class="panel_visible">
@@ -38,8 +41,8 @@
                     <label class="form_label" for="email">Email</label>
                     <input class="form_input" type="text" id="em" name="email" onchange="checkEmail()">
                     <button class="form_btn" type="submit" id="signup">Submit</button>
-                    <button class="form_toggle js-formToggle" type="button" id="toSignin">Or, Sign In</button>
                 </form>
+                <button class="form_toggle js-formToggle" type="button" id="toSignin">Or, Sign In</button>
             </div>
             <!--Sign <input type="text" name="" value="">-->
             <div class="panel_content panel_content-overlay js-panel_content ">
@@ -49,9 +52,9 @@
                     <input class="form_input" type="text" id="usernameIn" name="usernameIn">
                     <label class="form_label" for="passwordIn">Password</label>
                     <input class="form_input " type="password" id="passwordIn" name="passwordIn">
-                    <button class="form_btn" type="button" value="Submit" id="signin">Sign In</button>
-                    <button class="form_toggle js-formToggle" type="button" id="toSignup">Or, Sign Up</button>
+                    <button class="form_btn" type="submit" id="signin">Sign In</button>
                 </form>
+                <button class="form_toggle js-formToggle" type="button" id="toSignup">Or, Sign Up</button>
             </div>
         </div>
         <div class="panel_back js-imageAnimate">

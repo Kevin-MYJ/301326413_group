@@ -272,6 +272,7 @@ function Gaming() {
     var diff = $('input[name="difficulty"]:checked').val();
     if (diff == "easy") {
         difficult = 43;
+        // difficult = 43;
         multiple = 28;
     }else if (diff == "medium") {
         difficult = 51;
@@ -293,16 +294,18 @@ function Gaming() {
 
     showInBoard(solution, questionArr);
 
+    console.log(solution);
+
     $("#time").html("00"+":"+"00");
     let assist = setInterval(function(){
         time++;
-        if(parseInt(time % 30) === 4 && parseInt(time / 60) != 0){
+        if(parseInt(time % 30) === 4 && parseInt(time / 60) != 0 && multiple > 1){
             multiple--;
         }
         $("#product").html("X"+multiple);
         sec = time % 60;
         min = parseInt(time / 60);
-        let secShow, minShow;
+        var secShow, minShow;
         if (sec < 10){
             secShow = "0" + sec;
         }else{
@@ -337,7 +340,27 @@ function Gaming() {
             trueInput += 1;
             if (trueInput === difficult) {
                 clearInterval(assist);
-                alert("finish");
+                var secShow, minShow;
+                if (sec < 10) {
+                    secShow = "0" + sec;
+                } else {
+                    secShow = "" + sec;
+                }
+                if (min < 10) {
+                    minShow = "0" + min;
+                } else {
+                    minShow = "" + min;
+                }
+                var timer = minShow + ":" + secShow;
+                // recordData(difficult, timer, score);
+                let message = "You spend " + timer + " time to complete " + diff +" Sudoku game. The total score is " + score;
+                // alert(message);
+                swal("Success !", message, "success", {
+                    button: "record",
+                });
+                $("button[class='swal-button swal-button--confirm']").on("click", function(){
+                    recordData(diff, timer, score);
+                });
             }
         }else{
             falseInput += 1;
@@ -347,8 +370,27 @@ function Gaming() {
                 $("div.select-row, .select-input").off("click");
                 $("#scoreNumber").html(score);
                 clearInterval(assist);
-                window.setTimeout(function(){alert("Loss");}, 700);
+                swal("Fail !", "Three consecutive errors! This round failed.", "error", {button : "Replay"});
+                $("button[class='swal-button swal-button--confirm']").on("click", function(){
+                    window.location.reload();
+                });
             }
         }
     });
+}
+
+function recordData(difficult, time, score) {
+    let name = $("#userN").html();
+    let form = $("<form action='/sudoku' method='POST'></form>").hide();
+    let inputName = $("<input type='text'>").attr("name", "player").val(name).hide(); 
+    let inputDiff = $("<input type='text'>").attr("name", "difficult").val(difficult).hide();
+    let inputTime = $("<input type='text'>").attr("name", "timer").val(time).hide();
+    let inputScore = $("<input type='text'>").attr("name", "result").val(score).hide();
+    form.append(inputName);
+    form.append(inputDiff);
+    form.append(inputTime);
+    form.append(inputScore);
+    $("body").append($(form));
+    // form.append($("button[class='swal-button swal-button--confirm']"));
+    form.submit();
 }

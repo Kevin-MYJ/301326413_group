@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/usergrade.css">
+    <title>Grades</title>
+</head>
+<body>
+    <div id="container">
+        <div id="top-bar">
+            <div id="back">
+                <form action="/sudoku1" method="POST" id="back-form">
+                    <button id="back-btn" type="submit">Back</button>
+                </form>
+            </div>
+            <div id="signout">
+                <form action="/signout" method="POST">
+                    <button id="sign-out" type="submit">Sign Out</button>
+                </form>
+            </div>
+        </div>
+        <div id="grades">
+            <div>
+                <h1 id="user-name"><%=name%> Past Grades</h1>
+            </div>
+            <table>
+                <tr>
+                    <th>Game Difficulty</th>
+                    <th>Complete Time</th>
+                    <th>Final Score</th>
+                    <th>Record Date</th>
+                </tr>
+                <% data.forEach((d) =>{%>
+                    <tr>
+                        <td><%=d.difficulty%></td>    
+                        <td><%=d.time%></td>    
+                        <td><%=d.score%></td>    
+                        <td><%=d.datetime%></td>
+                    </tr>    
+                <% }); %>
+            </table>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="/js/userGrade.js"></script>
+</body>
+</html>
