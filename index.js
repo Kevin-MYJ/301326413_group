@@ -5,8 +5,8 @@ var app = express();
 
 const { Pool } = require("pg");
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL
-  // ssl: true,
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
 });
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json());
@@ -51,7 +51,7 @@ app.post("/update", async (req, res) => {
   }
   if (judg_name == "new" && judg_email == "new") {
     var insertQuery = await client.query(
-      `INSERT INTO users(username, password, email, type)VALUES('${name}', '${password}', '${email}', 'user');`
+      `INSERT INTO users(username, password, email, type)VALUES('${name}', '${password}', '${email}', 'player');`
     );
     res.render("pages/login", { 'determine': 0, 'signupMessage': ""});
   }
