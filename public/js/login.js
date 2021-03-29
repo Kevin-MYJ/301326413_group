@@ -48,3 +48,15 @@ function checkEmail() {
         $("#em").css({ "border": "none" });
     }
 }
+
+function onSignIn2(googleUser){
+		var profile = googleUser.getBasicProfile();
+		console.log('User is ' + JSON.stringify(profile))
+
+		var element = document.querySelector('#content')
+		element.innerText = profile.getName();
+
+		console.log('ID: ' + profile.getId());
+		console.log('Name: ' + profile.getName());
+		console.log('Email: ' + profile.getEmail());
+	}
