@@ -82,7 +82,7 @@ app.post("/login", async (req, res) =>{
         }
       }
       else{
-        res.render("pages/admin");
+        res.render("pages/sudoku", {'name':user});
       }
     })
   }
