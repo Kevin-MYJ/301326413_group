@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="google-signin-client_id" content="735505642068-elr54io1fqes6cuq6k39pjvnij7ujrq8.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
     <title>Sudoku.oni</title>
     <link rel="stylesheet" href="stylesheets/login.css">
 </head>
@@ -67,6 +70,8 @@
                     <button class="form_btn" type="submit" id="signin">Sign In</button>
                 </form>
                 <button class="form_toggle js-formToggle" type="button" id="toSignup">Or, Sign Up</button>
+                <div class="g-signin2" ></div>
+                <div id="content"></div>
             </div>
         </div>
         <div class="panel_back js-imageAnimate">

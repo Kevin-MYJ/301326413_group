@@ -140,6 +140,11 @@ body, html{
     display:block;
 }
 
+.g-signin2{
+    position:relative;
+    left:66px;
+}
+
 /* Form */
 .form{
     box-sizing:border-box;

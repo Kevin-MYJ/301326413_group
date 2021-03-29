@@ -71,13 +71,18 @@ app.post("/login", async (req, res) =>{
     console.log(pw);
     //console.log(data_password);
     data_password.forEach(async function (t) {
-      if(t.password != pw){
-        err = "Incorrect password!";
-        res.render("pages/login", { 'determine': 0, 'signupMessage': err });
-        return;
+      if(t.type == "player"){
+        if(t.password != pw){
+          err = "Incorrect password!";
+          res.render("pages/login", { 'determine': 0, 'signupMessage': err });
+          return;
+        }
+        else{
+          res.render("pages/sudoku", {'name':user});
+        }
       }
       else{
-        res.render("pages/sudoku", {'name':user});
+        res.render("pages/admin");
       }
     })
   }
