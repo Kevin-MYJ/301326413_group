@@ -11,3 +11,4 @@ When ordinary users enter our webpage, they need to enter their username and pas
 For our next group meeting, we will gather the information that we individually discovered together and talk about how to implement a part of our Sudoku.oni game. The goals of each of our members will be more detailed and specified.
 
 GitHub: https://github.com/Kevin-MYJ/301326413_group.git
+Application: https://group-301326413.herokuapp.com/
