@@ -54,7 +54,7 @@ function onSignIn2(googleUser){
 		console.log('User is ' + JSON.stringify(profile))
 
 		var element = document.querySelector('#content')
-		element.innerText = profile.getName();
+		//element.innerText = profile.getName();
 
 		console.log('ID: ' + profile.getId());
 		console.log('Name: ' + profile.getName());
